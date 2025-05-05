@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv(r'fb.csv')
+df.head(10)
+df.describe()
+df.shape
+df.iloc[:60,1:4]
+df1=df[["Page total likes","Category","Post Month"]].loc[:20]
+df2=df[['Page total likes','Category','Post Month']].loc[21:40]
+merging=pd.concat([df1,df2,df3])
+sort_values=df.sort_values('Page total likes',ascending=False);
+sort_values
+df.transpose()
+
+shaping=df.shape
+pivot_table=pd.pivot_table(df,index=['Type','Category],values='comment')
+print(pivot_table)
+reshaping_arr=np.array([1,2,3,4,5,6])
+reshaping_arr.reshape(3,2)
+
+X=df.drop(["Page total likes","Category","Post Month"],axis=1) 
+X.shape
+X=df.drop([1,2,3,4,5,6,7,8])
+z=X.T
+z.melt 
+y=pd.get_dummies(z)
