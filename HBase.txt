@@ -1,0 +1,31 @@
+sudo service zookeeper-server start
+sudo service hadoop-hdfs-namenode start
+sudo service hadoop-hdfs-datanode start
+sudo service hbase-master start
+sudo service hbase-regionserver start
+hbase shell
+
+create 'student', 'info'
+
+put 'student', '1', 'info:name', 'pratham'
+put 'student', '1', 'info:age', '23'
+
+put 'student', '2', 'info:name', 'yadni'
+put 'student', '2', 'info:age', '20'
+
+scan 'student'
+////
+create external table stud(
+    key STRING,
+    name STRING,
+    age STRING
+)
+stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+with serdeproperties(
+    "hbase.columns.mapping" = ":key,info:name,info:age"
+)
+tblproperties("hbase.table.name" = "student");
+
+select * from stud;
+
+insert into stud values('3', 'prathamesh', '22');
