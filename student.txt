@@ -1,3 +1,4 @@
+
 hive
 create database mydb1;
 show databases;
