@@ -1,0 +1,53 @@
+hive
+create database mydb1;
+show databases;
+use mydb1;
+
+create table student(name string,id int)
+alter table student rename to student1;
+alter table student1 add columns(dob date);
+drop table student1; 
+
+create table stud_record(name string,stu_id int,std int)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+desc stud_record;
+
+insert into stud_record values('Ayush',27,08);
+insert into stud_record values('Piyush',30,12);
+
+select * from stud_record;
+
+gedit pp.txt
+pwd
+ls
+
+load data local inpath "pp.txt"
+overwrite into table stud_record;
+
+select * from stud_record;
+
+create table nstud_rec(name string,stu_id int,dob date)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+insert into nstud_rec values('Ayush',27,'2004-12-09');
+insert into nstud_rec values('Rohit,30,'2003-07-12');
+
+select a.name,a.stu_id,a.std,b.dob
+from stud_record a join nstud_rec b
+on(a.stu_id=b.stu_id);
+
+select * from nstud_rec;
+
+create index stud_index on stud_record(name)
+as 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler'
+WITH DEFERRED REBUILD;
+
+
+show tables;
