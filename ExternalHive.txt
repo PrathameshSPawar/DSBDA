@@ -1,0 +1,22 @@
+hive
+create database mydb4;
+use mydb4;
+
+create table hive_int(id int,name string,sala int)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+gedit data.txt
+
+load data local inpath 'data.txt' into table hive_int;
+select * from hive_int;
+create external table hive_ext(id int,name string,sala int)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+insert into hive_ext select * from hive_int;
+select * from hive_ext;
