@@ -1,0 +1,21 @@
+import requests
+import bs4
+
+response = requests.get('link')
+print(response)
+
+print(response.content)
+
+soup = bs4.BeautifulSoup(response.text, 'html.parser')
+
+reviews = soup.find_all('div', {'class': ''})
+for review in reviews:
+    print(review.get_text() + '\n')
+
+ratings = soup.find('div', {'class': ''})
+if ratings:
+    print(ratings.get_text() + '\n')
+
+individual_rates = soup.find_all('div', {'class': 'xnsArt'})
+for indi_rate in individual_rates:
+    print(indi_rate.get_text() + '\n')
